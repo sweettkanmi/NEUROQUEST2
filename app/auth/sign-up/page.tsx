@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
@@ -17,32 +17,54 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  async function handleSignUp(e: React.FormEvent) {
+  const handleSignUp = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-
-    const supabase = createClient()
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo:
-          process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
-          `${window.location.origin}/dashboard`,
-        data: {
-          display_name: displayName || "Aventurero",
-        },
-      },
-    })
-
-    if (error) {
-      toast.error(error.message)
-      setLoading(false)
+    
+    // Basic validation
+    if (!email.trim() || !password.trim()) {
+      toast.error("Por favor completa todos los campos requeridos")
       return
     }
 
-    router.push("/auth/sign-up-success")
-  }
+    if (password.length < 6) {
+      toast.error("La contrasena debe tener al menos 6 caracteres")
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      const supabase = createClient()
+      
+      // Sign up the user
+      const { data, error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: {
+          data: {
+            display_name: displayName.trim() || "Aventurero",
+          },
+        },
+      })
+
+      if (error) {
+        toast.error(error.message)
+        return
+      }
+
+      // Verify user was created in database
+      if (data.user) {
+        toast.success("Cuenta creada exitosamente! Por favor inicia sesion.")
+        router.push("/auth/login")
+      } else {
+        toast.error("Error al crear la cuenta. Intenta de nuevo.")
+      }
+    } catch {
+      toast.error("Error de conexion. Intenta de nuevo.")
+    } finally {
+      setLoading(false)
+    }
+  }, [email, password, displayName, router])
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 rpg-grid-bg">
