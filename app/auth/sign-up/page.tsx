@@ -22,13 +22,12 @@ export default function SignUpPage() {
     setLoading(true)
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({
+    
+    // Sign up the user - email confirmation is disabled in Supabase settings
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo:
-          process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
-          `${window.location.origin}/dashboard`,
         data: {
           display_name: displayName || "Aventurero",
         },
@@ -41,7 +40,28 @@ export default function SignUpPage() {
       return
     }
 
-    router.push("/auth/sign-up-success")
+    // Check if user was created and session is available
+    if (data.user && data.session) {
+      toast.success("Cuenta creada exitosamente. Bienvenido, aventurero!")
+      router.push("/dashboard")
+      router.refresh()
+    } else if (data.user && !data.session) {
+      // If no session, try to sign in immediately
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+      
+      if (signInError) {
+        toast.error("Cuenta creada, pero hubo un error al iniciar sesion. Por favor, inicia sesion manualmente.")
+        router.push("/auth/login")
+        return
+      }
+      
+      toast.success("Cuenta creada exitosamente. Bienvenido, aventurero!")
+      router.push("/dashboard")
+      router.refresh()
+    }
   }
 
   return (
