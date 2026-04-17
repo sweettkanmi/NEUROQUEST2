@@ -17,7 +17,7 @@
 
 ---
 
-## Prerequisites
+## Prerequisitesaiuhdiau
 
 - **Node.js** 20+ (install from https://nodejs.org or use `nvm`)
 - **pnpm** — `npm install -g pnpm`
