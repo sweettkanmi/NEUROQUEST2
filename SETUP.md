@@ -1,4 +1,4 @@
-# QuestMind — Local Setup Guide
+# NeuroQuest — Local Setup Guide
 
 ## What was fixed
 - ✅ Replaced OpenAI/GPT-4o with **Claude** (claude-opus-4-5 via `@ai-sdk/anthropic`)
@@ -14,7 +14,7 @@
 - ✅ Added fallback for empty chest reward pool
 - ✅ Added input validation to answer and use-item routes
 - ✅ Replaced SQL `004_chests_and_perks.sql` with `004_inventory.sql` matching `inventory_items` table
-
+adad
 ---ddd
 
 ## Prerequisitesaiuhdiau
