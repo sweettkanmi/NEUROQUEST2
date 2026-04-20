@@ -10,7 +10,7 @@ export default function AboutPage() {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <span className="text-primary-foreground font-bold text-sm font-mono">Q</span>
           </div>
-          <span className="font-bold text-lg text-foreground">QuestMind</span>
+          <span className="font-bold text-lg text-foreground">NeuroQuest</span>
         </Link>
         <nav className="flex items-center gap-4">
           <Link
@@ -144,6 +144,37 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
+
+            {/* Team Member Card - Johan Balcázar */}
+            <div className="bg-card border border-border/50 rounded-xl p-6 md:p-8 mt-6">
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Avatar Placeholder */}
+                <div className="flex-shrink-0 mx-auto md:mx-0">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/30">
+                    <span className="text-4xl md:text-5xl font-bold text-primary">J</span>
+                  </div>
+                </div>
+
+                {/* Info */}
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-foreground mb-1">
+                    Johan Balcazar
+                  </h3>
+                  <p className="text-primary font-medium mb-4">
+                    Desarrollador
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                    Johan Balcazar es estudiante de tecnologia en desarrollo de software, en la institucion educativa Lumen Gentium - UNICATOLICA. Inicio su camino en la programacion desde los 17 anos, le interesan los diferentes lenguajes de programacion e incrementar su aprendizaje en nuevos proyectos de esa area.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-4">
+                    No ha participado en muchos trabajos o proyectos relacionados sobre la programacion de varios sitios web o semejantes pero le llaman la atencion y en los pocos que ha participado, aprende algo nuevo, con buena habilidad para analizar.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-4">
+                    En este nuevo proyecto que es de la universidad en el que esta con sus companeros de equipo para desarrollar una aplicacion para personas con TDAH (trastorno por deficit de atencion e hiperactividad), es bastante interesante y cada vez que avanzan, aprende mas sobre el tema.
+                  </p>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
       </div>
@@ -151,7 +182,7 @@ export default function AboutPage() {
       {/* Footer */}
       <footer className="px-6 py-8 border-t border-border/50 text-center">
         <p className="text-sm text-muted-foreground">
-          QuestMind - Aprende jugando. Hecho para estudiantes con TDAH.
+          NeuroQuest - Aprende jugando. Hecho para estudiantes con TDAH.
         </p>
       </footer>
     </main>

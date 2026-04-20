@@ -1,4 +1,4 @@
-# QuestMind — Local Setup Guide
+# NeuroQuest — Local Setup Guide
 
 ## What was fixed
 - ✅ Replaced OpenAI/GPT-4o with **Claude** (claude-opus-4-5 via `@ai-sdk/anthropic`)
