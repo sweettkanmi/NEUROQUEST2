@@ -86,7 +86,7 @@ export default function AboutPage() {
               Responsables
             </h2>
 
-            {/* Team Member Card */}
+            {/* Team Member Card - Stevan Ortiz */}
             <div className="bg-card border border-border/50 rounded-xl p-6 md:p-8">
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Avatar Placeholder */}
