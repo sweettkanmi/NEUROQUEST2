@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { getLevelProgress } from "@/lib/types"
-import { Swords, Home, Package, User, LogOut } from "lucide-react"
+import { Swords, Home, Package, User, LogOut, ClipboardList } from "lucide-react"
 import { toast } from "sonner"
 
 interface DashboardNavProps {
@@ -31,6 +31,7 @@ export function DashboardNav({ displayName, level, xp }: DashboardNavProps) {
     { href: "/dashboard", label: "Inicio", icon: Home },
     { href: "/dashboard/inventory", label: "Inventario", icon: Package },
     { href: "/dashboard/profile", label: "Perfil", icon: User },
+    { href: "/dashboard/cuestionario-sus", label: "Cuestionario SUS", icon: ClipboardList },
   ]
 
   return (
