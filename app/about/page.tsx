@@ -7,8 +7,14 @@ export default function AboutPage() {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-border/50">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm font-mono">Q</span>
+          <div className="w-8 h-8 rounded-lg overflow-hidden">
+            <Image
+              src="https://i.ibb.co/3mHxWbym/Chat-GPT-Image-20-abr-2026-16-31-42.png"
+              alt="NeuroQuest Logo"
+              width={32}
+              height={32}
+              className="w-full h-full object-cover"
+            />
           </div>
           <span className="font-bold text-lg text-foreground">NeuroQuest</span>
         </Link>
@@ -37,7 +43,7 @@ export default function AboutPage() {
       {/* Main Content */}
       <div className="flex-1 rpg-grid-bg">
         <div className="max-w-4xl mx-auto px-6 py-12">
-          
+
           {/* University Header Section */}
           <section className="text-center mb-16">
             <div className="flex flex-col items-center gap-6">
@@ -59,7 +65,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            
+
             {/* University Description */}
             <div className="max-w-3xl mx-auto mt-8 text-left">
               <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-4">
@@ -80,7 +86,7 @@ export default function AboutPage() {
               Responsables
             </h2>
 
-            {/* Team Member Card */}
+            {/* Team Member Card - Stevan Ortiz */}
             <div className="bg-card border border-border/50 rounded-xl p-6 md:p-8">
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Avatar Placeholder */}
