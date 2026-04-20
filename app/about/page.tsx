@@ -43,7 +43,7 @@ export default function AboutPage() {
             <div className="flex flex-col items-center gap-6">
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden bg-card p-4 border border-border/50">
                 <Image
-                  src="https://www.unicatolica.edu.co/files/unicatolica-svg.svg"
+                  src="https://www.unicatolica.edu.co/files/logo-unicatolica-vertical.png"
                   alt="Logo UNICATOLICA"
                   width={160}
                   height={160}
@@ -54,10 +54,23 @@ export default function AboutPage() {
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2">
                   UNICATOLICA
                 </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground">
+                <p className="text-xl md:text-2xl text-muted-foreground mb-6">
                   LUMEN GENTIUM
                 </p>
               </div>
+            </div>
+            
+            {/* University Description */}
+            <div className="max-w-3xl mx-auto mt-8 text-left">
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-4">
+                Lumen Gentium – UNICATOLICA es una institucion educativa comprometida con la formacion integral de sus estudiantes, promoviendo el desarrollo academico, humano y etico dentro de un entorno basado en valores. Como parte de Fundacion Universitaria Catolica Lumen Gentium, se enfoca en brindar educacion accesible y de calidad, preparando a sus estudiantes para enfrentar los retos del mundo profesional y tecnologico actual.
+              </p>
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-4">
+                La institucion impulsa el aprendizaje a traves de metodologias que combinan teoria y practica, fomentando el pensamiento critico, la creatividad y la innovacion. Ademas, promueve una formacion orientada a la responsabilidad social, buscando que sus estudiantes no solo desarrollen habilidades tecnicas, sino tambien una vision consciente de su impacto en la sociedad.
+              </p>
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                En este entorno, los estudiantes encuentran un espacio para crecer, explorar sus capacidades y construir proyectos con proposito, apoyados por una comunidad academica que valora el esfuerzo, la disciplina y la evolucion constante.
+              </p>
             </div>
           </section>
 
@@ -96,6 +109,37 @@ export default function AboutPage() {
                   </p>
                   <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-4">
                     A partir de esta realidad, decidió crear esta aplicación como una herramienta tanto para su propio crecimiento como para apoyar a quienes atraviesan dificultades similares, buscando facilitar el enfoque, la constancia y el cumplimiento de metas educativas.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Team Member Card - Juan Sebastián Molina */}
+            <div className="bg-card border border-border/50 rounded-xl p-6 md:p-8 mt-6">
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Avatar Placeholder */}
+                <div className="flex-shrink-0 mx-auto md:mx-0">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/30">
+                    <span className="text-4xl md:text-5xl font-bold text-primary">J</span>
+                  </div>
+                </div>
+
+                {/* Info */}
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-foreground mb-1">
+                    Juan Sebastian Molina
+                  </h3>
+                  <p className="text-primary font-medium mb-4">
+                    Desarrollador
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                    Juan Sebastian Molina es estudiante de Tecnologia en Desarrollo de Software en la Fundacion Universitaria Lumen Gentium, en Cali. Se caracteriza por su interes en afrontar desafios que le permitan fortalecer sus habilidades y adquirir nuevos conocimientos en el area tecnologica.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-4">
+                    A lo largo de su formacion, ha desarrollado diversos prototipos funcionales de paginas web, incluyendo tanto recreaciones de plataformas existentes como disenos propios, lo que evidencia su capacidad para aplicar conceptos teoricos en soluciones practicas.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-4">
+                    Se destaca por su habilidad para el trabajo en equipo y su disposicion para seguir lineamientos de manera efectiva, contribuyendo al cumplimiento de objetivos en entornos colaborativos. Asimismo, muestra afinidad por proyectos dinamicos que impliquen aprendizaje continuo y adaptacion a nuevos retos dentro del desarrollo de software.
                   </p>
                 </div>
               </div>
