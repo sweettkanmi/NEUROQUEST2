@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { getLevelProgress } from "@/lib/types"
-import { Swords, Home, Package, User, LogOut } from "lucide-react"
+import { Swords, Home, Package, User, LogOut, Trophy, Info } from "lucide-react"
 import { toast } from "sonner"
 
 interface DashboardNavProps {
@@ -27,10 +27,13 @@ export function DashboardNav({ displayName, level, xp }: DashboardNavProps) {
     router.refresh()
   }
 
+  // data-tutorial values are used by the tutorial overlay to highlight these links
   const links = [
-    { href: "/dashboard", label: "Inicio", icon: Home },
-    { href: "/dashboard/inventory", label: "Inventario", icon: Package },
-    { href: "/dashboard/profile", label: "Perfil", icon: User },
+    { href: "/dashboard",           label: "Inicio",    icon: Home,    tutorialId: undefined           },
+    { href: "/dashboard/inventory", label: "Inventario",icon: Package, tutorialId: "nav-inventory"    },
+    { href: "/dashboard/records",   label: "RECORDS",   icon: Trophy,  tutorialId: "nav-records"      },
+    { href: "/dashboard/profile",   label: "Perfil",    icon: User,    tutorialId: "nav-profile"      },
+    { href: "/about",               label: "About Us",  icon: Info,    tutorialId: undefined           },
   ]
 
   return (
@@ -51,6 +54,9 @@ export function DashboardNav({ displayName, level, xp }: DashboardNavProps) {
                 <Link
                   key={link.href}
                   href={link.href}
+                  {...(link.tutorialId
+                    ? { "data-tutorial": link.tutorialId }
+                    : {})}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
                     isActive
                       ? "bg-secondary text-foreground"

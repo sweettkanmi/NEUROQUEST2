@@ -6,6 +6,14 @@ export interface Profile {
   total_games: number
   total_correct: number
   created_at: string
+  current_streak: number
+  longest_streak: number
+  last_activity_date: string | null
+  streak_updated_at: string | null
+  // ── Tutorial onboarding ──────────────────────────────
+  tutorial_completed: boolean
+  tutorial_skipped: boolean
+  tutorial_completed_at: string | null
 }
 
 export interface GameSession {
@@ -70,7 +78,6 @@ export const LEVEL_THRESHOLDS = [
 
 export function getLevelProgress(xp: number) {
   let level = 1
-  // Don't break early — check all thresholds so skipping levels works correctly
   for (let i = 1; i < LEVEL_THRESHOLDS.length; i++) {
     if (xp >= LEVEL_THRESHOLDS[i]) {
       level = i + 1
