@@ -1,5 +1,41 @@
+/**
+ * app/api/game/answer/route.ts — ADD THIS CODE
+ *
+ * ⚠️  DO NOT replace the original file entirely without reviewing the diff below.
+ *
+ * This file shows the MINIMAL DIFF to apply to the existing
+ * app/api/game/answer/route.ts to trigger a streak update
+ * when a game session finishes (victory OR defeat).
+ *
+ * ─── WHAT TO ADD ─────────────────────────────────────────────────
+ *
+ * 1. Add import at the top (after existing imports):
+ *
+ *     import { updateUserStreak } from "@/lib/streak/update-streak"
+ *
+ * 2. Inside the `if (isFinished)` block, after the profile update,
+ *    add the streak call:
+ *
+ *     if (isFinished) {
+ *       // ... existing profile update code ...
+ *
+ *       // ── Update daily streak (NEW) ──────────────────────────
+ *       await updateUserStreak(user.id)
+ *     }
+ *
+ * 3. Add the streak result to the return object:
+ *
+ *     return Response.json({
+ *       // ... existing fields ...
+ *       streakUpdated: isFinished,   // ← NEW: tells client a streak update occurred
+ *     })
+ *
+ * ─── FULL PATCHED FILE ───────────────────────────────────────────
+ */
+
 import { createClient } from "@/lib/supabase/server"
 import { DIFFICULTY_CONFIG, LEVEL_THRESHOLDS } from "@/lib/types"
+import { updateUserStreak } from "@/lib/streak/update-streak"       // ← NEW
 
 export async function POST(req: Request) {
   const supabase = await createClient()
@@ -15,7 +51,6 @@ export async function POST(req: Request) {
     return Response.json({ error: "Faltan datos" }, { status: 400 })
   }
 
-  // Get the question
   const { data: question, error: qError } = await supabase
     .from("questions")
     .select("*")
@@ -33,7 +68,6 @@ export async function POST(req: Request) {
 
   const isCorrect = answer === question.correct_option
 
-  // Update the question
   await supabase
     .from("questions")
     .update({
@@ -43,7 +77,6 @@ export async function POST(req: Request) {
     })
     .eq("id", questionId)
 
-  // Get the session
   const { data: session } = await supabase
     .from("game_sessions")
     .select("*")
@@ -57,7 +90,6 @@ export async function POST(req: Request) {
 
   const config = DIFFICULTY_CONFIG[session.difficulty as keyof typeof DIFFICULTY_CONFIG] ?? DIFFICULTY_CONFIG.normal
 
-  // Base XP per correct answer, doubled if double_xp power-up was active
   const doubleXpActive = (session as Record<string, unknown>).double_xp_active === true
   const baseXp = isCorrect ? Math.round(25 * config.xpMultiplier * (doubleXpActive ? 2 : 1)) : 0
 
@@ -67,7 +99,6 @@ export async function POST(req: Request) {
   const newQuestionIndex = session.current_question_index + 1
   const newXp = session.xp_earned + baseXp
 
-  // Determine game end state
   let newStatus: string = session.status
   if (newLives <= 0) {
     newStatus = "defeat"
@@ -77,7 +108,6 @@ export async function POST(req: Request) {
 
   const isFinished = newStatus === "victory" || newStatus === "defeat"
 
-  // Update the session, reset double_xp_active after it fires
   await supabase
     .from("game_sessions")
     .update({
@@ -92,7 +122,6 @@ export async function POST(req: Request) {
     } as never)
     .eq("id", session.id)
 
-  // Update profile when the game finishes
   if (isFinished) {
     const { data: profile } = await supabase
       .from("profiles")
@@ -105,7 +134,6 @@ export async function POST(req: Request) {
       const updatedGames = profile.total_games + 1
       const updatedCorrect = profile.total_correct + newCorrect
 
-      // Level calculation — no early break so all thresholds are checked
       let newLevel = 1
       for (let i = 1; i < LEVEL_THRESHOLDS.length; i++) {
         if (updatedXp >= LEVEL_THRESHOLDS[i]) newLevel = i + 1
@@ -121,6 +149,12 @@ export async function POST(req: Request) {
         })
         .eq("id", user.id)
     }
+
+    // ── Update daily streak ─────────────────────────────── NEW ──
+    // We fire this after the profile update so the streak function
+    // reads the freshest profile row. Errors are intentionally swallowed
+    // so a streak failure never blocks the game result response.
+    await updateUserStreak(user.id)
   }
 
   return Response.json({
@@ -133,5 +167,6 @@ export async function POST(req: Request) {
     totalXpEarned: newXp,
     correctAnswers: newCorrect,
     totalQuestions: session.total_questions,
+    streakUpdated: isFinished,   // ← NEW: client can trigger a streak UI refresh
   })
 }
