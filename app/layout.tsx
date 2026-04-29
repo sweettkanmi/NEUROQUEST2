@@ -9,7 +9,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'QuestMind - RPG Educativo',
+  title: 'NeuroQuest - RPG Educativo',
   description: 'Convierte tus apuntes en aventuras. Sube un PDF, enfrenta preguntas tipo RPG y aprende jugando.',
   generator: 'v0.app',
   icons: {

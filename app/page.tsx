@@ -11,9 +11,15 @@ export default function HomePage() {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <span className="text-primary-foreground font-bold text-sm font-mono">Q</span>
           </div>
-          <span className="font-bold text-lg text-foreground">QuestMind</span>
+          <span className="font-bold text-lg text-foreground">NeuroQuest</span>
         </div>
         <nav className="flex items-center gap-4">
+          <Link
+            href="/about"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            About Us
+          </Link>
           <Link
             href="/auth/login"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -35,7 +41,7 @@ export default function HomePage() {
 
       <footer className="px-6 py-8 border-t border-border/50 text-center">
         <p className="text-sm text-muted-foreground">
-          QuestMind - Aprende jugando. Hecho para estudiantes con TDAH.
+          NeuroQuest - Aprende jugando. Hecho para estudiantes con TDAH.
         </p>
       </footer>
     </main>

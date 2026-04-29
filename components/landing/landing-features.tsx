@@ -35,7 +35,7 @@ export function LandingFeatures() {
     <section className="px-6 py-20 bg-rpg-surface">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-foreground mb-12 text-balance">
-          Como funciona QuestMind
+          Como funciona NeuroQuest
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

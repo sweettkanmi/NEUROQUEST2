@@ -44,7 +44,7 @@ export function DashboardNav({ displayName, level, xp }: DashboardNavProps) {
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <Swords className="w-4 h-4 text-primary-foreground" />
             </div>
-            <span className="font-bold text-foreground hidden sm:block">QuestMind</span>
+            <span className="font-bold text-foreground hidden sm:block">NeuroQuest</span>
           </Link>
 
           <nav className="flex items-center gap-1 ml-4">

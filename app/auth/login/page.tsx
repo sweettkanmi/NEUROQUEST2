@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
@@ -16,23 +16,45 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  async function handleLogin(e: React.FormEvent) {
+  const handleLogin = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-
-    if (error) {
-      toast.error(error.message)
-      setLoading(false)
+    
+    // Basic validation
+    if (!email.trim() || !password.trim()) {
+      toast.error("Por favor completa todos los campos")
       return
     }
 
-    toast.success("Bienvenido de vuelta, aventurero!")
-    router.push("/dashboard")
-    router.refresh()
-  }
+    setLoading(true)
+
+    try {
+      const supabase = createClient()
+      const { error } = await supabase.auth.signInWithPassword({ 
+        email: email.trim(), 
+        password 
+      })
+
+      if (error) {
+        // Provide user-friendly error messages
+        if (error.message.includes("Invalid login credentials")) {
+          toast.error("Credenciales incorrectas. Verifica tu correo y contrasena.")
+        } else if (error.message.includes("Email not confirmed")) {
+          toast.error("Tu cuenta no ha sido confirmada. Contacta al administrador.")
+        } else {
+          toast.error(error.message)
+        }
+        return
+      }
+
+      toast.success("Bienvenido de vuelta, aventurero!")
+      router.push("/dashboard")
+      router.refresh()
+    } catch {
+      toast.error("Error de conexion. Intenta de nuevo.")
+    } finally {
+      setLoading(false)
+    }
+  }, [email, password, router])
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 rpg-grid-bg">
