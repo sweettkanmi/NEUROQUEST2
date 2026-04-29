@@ -32,7 +32,7 @@ adad
 # Copy the project folder to wherever you want it, then:
 cd questmind
 pnpm install
-```
+```d
 
 ---
 
